@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GeometryTool
 {
-    public class Point
+    public class Vertex
     {
         public double x;
         public double y;

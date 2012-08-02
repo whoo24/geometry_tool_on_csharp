@@ -16,7 +16,7 @@ namespace GeometryTool
         public double b; // y의 계수
         public double c; // 상수
 
-        public static Line points_to_line(Point p1, Point p2)
+        public static Line points_to_line(Vertex p1, Vertex p2)
         {
             Line line = new Line();
 
@@ -35,7 +35,7 @@ namespace GeometryTool
             return line;
         }
 
-        public static Line point_and_slope_to_line(Point p, double m)
+        public static Line point_and_slope_to_line(Vertex p, double m)
         {
             Line line = new Line();
             line.a = -m;
@@ -62,9 +62,9 @@ namespace GeometryTool
         // x = -----------  y = m1 ----------- + b1
         //       m1 - m2             m1 - m2
 
-        public static bool intersection_point(Line l1, Line l2, ref Point p)
+        public static bool intersection_point(Line l1, Line l2, ref Vertex p)
         {
-            p = new Point();
+            p = new Vertex();
 
             if( is_same(l1, l2))
             {// 동일한 직선. 교점이 무한하게 많다.

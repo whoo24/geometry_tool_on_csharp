@@ -11,7 +11,8 @@
     <RootNamespace>GeometryTool</RootNamespace>
     <AssemblyName>GeometryTool</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -52,6 +53,9 @@
     <Compile Include="Canvas.Designer.cs">
       <DependentUpon>Canvas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gizmo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="PointObject.cs" />
     <Compile Include="GeomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,7 +63,7 @@
       <DependentUpon>GeomForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Line.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Vertex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Canvas.resx">
@@ -76,7 +80,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

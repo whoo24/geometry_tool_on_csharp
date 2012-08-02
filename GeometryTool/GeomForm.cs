@@ -11,8 +11,6 @@ namespace GeometryTool
 {
     public partial class GeomForm : Form
     {
-        List<Point> m_points = new List<Point>();
-
         public GeomForm()
         {
             InitializeComponent();
@@ -39,6 +37,18 @@ namespace GeometryTool
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void panel1_Click(object sender, EventArgs _e)
+        {
+            // create point at mouse point
+            MouseEventArgs e = _e as MouseEventArgs;
+
+            PointObject mouse_p = new PointObject { Position = new Vertex { x = e.X, y = e.Y } };
+
+            panel1.Points.Add(mouse_p);
+
+            panel1.Refresh();
         }
     }
 }
