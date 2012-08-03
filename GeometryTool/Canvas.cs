@@ -25,27 +25,58 @@ namespace GeometryTool
             set { m_lines = value; }
         }
 
+        Point left_corner = new Point(0);
+        public Point LeftCorner
+        {
+            get { return left_corner; }
+            set { left_corner = value; }
+        }
+
         public Canvas()
         {
             InitializeComponent();
+            left_corner.X = -Width / 2;
+            left_corner.Y = Height / 2;
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
+            Rectangle client_rect = new Rectangle( LeftCorner, this.Size );
+
             ClearColor(e);
-            DrawAxis(e);
-            DrawLines(e);
-            DrawPoints(e);
+            DrawAxis(client_rect, e);
+            DrawLines(client_rect, e);
+            DrawPoints(client_rect, e);
         }
 
-        void DrawAxis(PaintEventArgs e)
+        Point ToLocal(Point p)
         {
-            Rectangle client_rect = new Rectangle(0, 0, this.Width, this.Height);
+            Point local = new Point
+            {
+                X = p.X + LeftCorner.X,
+                Y = p.Y + LeftCorner.Y
+            };
+            return local;
+        }
+
+        Point ToScreen(Point p)
+        {
+            Point screen = new Point
+            {
+                X = p.X - LeftCorner.X,
+                Y = LeftCorner.Y - p.Y
+            };
+            return screen;
+        }
+
+        void DrawAxis(Rectangle client_rect, PaintEventArgs e)
+        {
             Brush WhiteBrush = new SolidBrush(Color.White);
 
             Pen axis_pen = new Pen(Color.Gray);
-            e.Graphics.DrawLine(axis_pen, new Point(0, client_rect.Height / 2), new Point(client_rect.Width, client_rect.Height / 2));
-            e.Graphics.DrawLine(axis_pen, new Point(client_rect.Width / 2, 0), new Point(client_rect.Width / 2, client_rect.Height));
+
+            e.Graphics.DrawLine(axis_pen, ToScreen(new Point(0, LeftCorner.Y - Height)), ToScreen(new Point(0, LeftCorner.Y))); // Y-Axis
+            e.Graphics.DrawLine(axis_pen, ToScreen(new Point(Width - LeftCorner.X, 0)), ToScreen(new Point(LeftCorner.X, 0))); // X-Axis
         }
 
         private void ClearColor(PaintEventArgs e)
@@ -53,7 +84,7 @@ namespace GeometryTool
             e.Graphics.Clear(Color.White);
         }
 
-        void DrawLines(PaintEventArgs e)
+        void DrawLines(Rectangle client_rect, PaintEventArgs e)
         {
             foreach (LineObject line in Lines)
             {
@@ -61,7 +92,7 @@ namespace GeometryTool
             }
         }
 
-        void DrawPoints(PaintEventArgs e)
+        void DrawPoints(Rectangle client_rect, PaintEventArgs e)
         {
             foreach (PointObject p in Points)
             {

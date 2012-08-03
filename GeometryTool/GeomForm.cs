@@ -31,12 +31,14 @@ namespace GeometryTool
             MakePointGizmo = new Gizmo
             {
                 OnClick = new Action<MouseEventArgs>(AddPoint),
+                OnMove = new Action<MouseEventArgs>(MovePanel),
                 OnFinish = () => {}
             };
 
             LinkPointGizmo = new Gizmo
             {
                 OnClick = new Action<MouseEventArgs>(LinkPoint),
+                OnMove = new Action<MouseEventArgs>(MovePanel),
                 OnFinish = () => { old_point = null; }
             };
 
@@ -45,6 +47,9 @@ namespace GeometryTool
 
         private void AddPoint(MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left)
+                return;
+
             PointObject mouse_p = new PointObject { Position = new Vertex { x = e.X, y = e.Y } };
 
             panel1.Points.Add(mouse_p);
@@ -56,6 +61,9 @@ namespace GeometryTool
 
         private void LinkPoint(MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left)
+                return;
+
             PointObject p = GetPointObject(e.Location);
             if (p != null)
             {
@@ -68,7 +76,21 @@ namespace GeometryTool
 
                 panel1.Refresh();
             }
-            
+        }
+
+        private void MovePanel(MouseEventArgs e)
+        {
+            //if (!Capture)
+            //    return;
+            if (e.Button != MouseButtons.Middle)
+                return;
+
+            Point left_corner = panel1.LeftCorner;
+            left_corner.Offset((old_mouse_point.X - e.X), (e.Y - old_mouse_point.Y));
+
+            old_mouse_point = e.Location;
+            panel1.LeftCorner = left_corner;
+            panel1.Refresh();
         }
 
         private PointObject GetPointObject(Point p)
@@ -99,6 +121,27 @@ namespace GeometryTool
             MouseEventArgs e = _e as MouseEventArgs;
 
             Global.Instance.Gizmo.OnClick(e);
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Global.Instance.Gizmo.OnMove(e);
+        }
+
+        Point old_mouse_point;
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //if (!Capture)
+            {
+            //    Capture = true;
+                old_mouse_point = e.Location;
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //if (Capture)
+            //    Capture = false;
         }
 
         

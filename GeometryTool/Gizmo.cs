@@ -14,6 +14,7 @@ namespace GeometryTool
         }
 
         public Action<MouseEventArgs> OnClick;
+        public Action<MouseEventArgs> OnMove;
         public Action OnFinish;
     }
 }
