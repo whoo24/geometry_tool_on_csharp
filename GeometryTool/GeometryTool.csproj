@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Gizmo.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="LineObject.cs" />
     <Compile Include="PointObject.cs" />
     <Compile Include="GeomForm.cs">
       <SubType>Form</SubType>

@@ -69,6 +69,7 @@
             this.toolStripButton2.Size = new System.Drawing.Size(37, 35);
             this.toolStripButton2.Text = "Line";
             this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // panel1
             // 
@@ -80,7 +81,6 @@
             this.panel1.TabIndex = 0;
             this.panel1.Click += new System.EventHandler(this.panel1_Click);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             // 
             // GeomForm
             // 

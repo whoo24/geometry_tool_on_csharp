@@ -23,20 +23,74 @@ namespace GeometryTool
 //            e.Graphics.FillEllipse(brush, e.ClipRectangle);
         }
 
-        
+        Gizmo MakePointGizmo;
+        Gizmo LinkPointGizmo;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MakePointGizmo = new Gizmo
+            {
+                OnClick = new Action<MouseEventArgs>(AddPoint),
+                OnFinish = () => {}
+            };
+
+            LinkPointGizmo = new Gizmo
+            {
+                OnClick = new Action<MouseEventArgs>(LinkPoint),
+                OnFinish = () => { old_point = null; }
+            };
+
+            Global.Instance.Gizmo = MakePointGizmo;
         }
 
-        private void panel1_Resize(object sender, EventArgs e)
+        private void AddPoint(MouseEventArgs e)
         {
+            PointObject mouse_p = new PointObject { Position = new Vertex { x = e.X, y = e.Y } };
+
+            panel1.Points.Add(mouse_p);
+
+            panel1.Refresh();
+        }
+
+        PointObject old_point;
+
+        private void LinkPoint(MouseEventArgs e)
+        {
+            PointObject p = GetPointObject(e.Location);
+            if (p != null)
+            {
+                if (old_point != null)
+                {
+                    LineObject line = new LineObject { Point1 = old_point, Point2 = p };
+                    panel1.Lines.Add(line);
+                }
+                old_point = p;
+
+                panel1.Refresh();
+            }
             
+        }
+
+        private PointObject GetPointObject(Point p)
+        {
+            foreach (PointObject point in panel1.Points)
+            {
+                if (point.Contains(p))
+                {
+                    return point;
+                }
+            }
+            return null;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            
+            Global.Instance.Gizmo = MakePointGizmo;            
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Global.Instance.Gizmo = LinkPointGizmo;
         }
 
         private void panel1_Click(object sender, EventArgs _e)
@@ -44,11 +98,9 @@ namespace GeometryTool
             // create point at mouse point
             MouseEventArgs e = _e as MouseEventArgs;
 
-            PointObject mouse_p = new PointObject { Position = new Vertex { x = e.X, y = e.Y } };
-
-            panel1.Points.Add(mouse_p);
-
-            panel1.Refresh();
+            Global.Instance.Gizmo.OnClick(e);
         }
+
+        
     }
 }

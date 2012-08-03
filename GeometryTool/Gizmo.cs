@@ -13,16 +13,7 @@ namespace GeometryTool
 
         }
 
-        public delegate void ClickEvent(PaintEventArgs e);
-        public Action<PaintEventArgs> OnClick;
+        public Action<MouseEventArgs> OnClick;
+        public Action OnFinish;
     }
-
-    public class GizmoMakePoint : Gizmo
-    {
-        GizmoMakePoint()
-        {
-            OnClick = delegate(PaintEventArgs e) { };
-        }
-    }
-
 }

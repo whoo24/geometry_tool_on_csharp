@@ -12,5 +12,20 @@ namespace GeometryTool
         {
             get { return instance; }
         }
+
+        Gizmo gizmo;
+        public Gizmo Gizmo
+        {
+            get
+            { return gizmo; }
+            set
+            {
+                if (gizmo != null)
+                {
+                    gizmo.OnFinish();
+                }
+                gizmo = value;
+            }
+        }
     }
 }

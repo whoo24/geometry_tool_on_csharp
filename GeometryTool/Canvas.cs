@@ -18,6 +18,13 @@ namespace GeometryTool
             set { m_points = value; }
         }
 
+        List<LineObject> m_lines = new List<LineObject>();
+        public List<LineObject> Lines
+        {
+            get { return m_lines; }
+            set { m_lines = value; }
+        }
+
         public Canvas()
         {
             InitializeComponent();
@@ -27,6 +34,7 @@ namespace GeometryTool
         {
             ClearColor(e);
             DrawAxis(e);
+            DrawLines(e);
             DrawPoints(e);
         }
 
@@ -45,13 +53,20 @@ namespace GeometryTool
             e.Graphics.Clear(Color.White);
         }
 
+        void DrawLines(PaintEventArgs e)
+        {
+            foreach (LineObject line in Lines)
+            {
+                line.Draw(e);
+            }
+        }
+
         void DrawPoints(PaintEventArgs e)
         {
             foreach (PointObject p in Points)
             {
                 p.Draw(e);
             }
-            
         }
 
         private void Canvas_Resize(object sender, EventArgs e)
