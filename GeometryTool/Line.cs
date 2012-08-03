@@ -20,7 +20,7 @@ namespace GeometryTool
         {
             Line line = new Line();
 
-            if( p1.x == p2.x )
+            if (p1.x == p2.x)
             {
                 line.a = 1;
                 line.b = 0;
@@ -47,7 +47,7 @@ namespace GeometryTool
         public static bool is_parallel(Line l1, Line l2)
         {
             return ((Math.Abs(l1.a - l2.a) <= double.Epsilon) &&
-                    (Math.Abs(l1.b - l2.b) <= double.Epsilon) );
+                    (Math.Abs(l1.b - l2.b) <= double.Epsilon));
         }
 
         public static bool is_same(Line l1, Line l2)
@@ -66,13 +66,13 @@ namespace GeometryTool
         {
             p = new Vertex();
 
-            if( is_same(l1, l2))
+            if (is_same(l1, l2))
             {// 동일한 직선. 교점이 무한하게 많다.
                 p.x = p.y = 0;
                 return true;
             }
 
-            if( is_parallel(l1, l2) == true )
+            if (is_parallel(l1, l2) == true)
             {
                 // 교점 없다
                 return false;
@@ -80,14 +80,41 @@ namespace GeometryTool
 
             p.x = (l2.b * l1.c - l1.b * l2.c) / (l2.a * l1.b - l1.a * l2.b);
 
-            if( Math.Abs(l1.b) > double.Epsilon )
-                p.y = - (l1.a * (p.x) + l1.c) / l1.b;
+            if (Math.Abs(l1.b) > double.Epsilon)
+                p.y = -(l1.a * (p.x) + l1.c) / l1.b;
             else
-                p.y = - (l2.a * (p.x) + l2.c) / l2.b;
+                p.y = -(l2.a * (p.x) + l2.c) / l2.b;
 
             return true;
         }
-    }
 
-    
+        public static bool closest_point(Vertex v, Line l, ref Vertex p)
+        {
+
+            if (Math.Abs(l.b) <= double.Epsilon) // 수직선
+            {
+                p = new Vertex
+                {
+                    x = -(l.c),
+                    y = v.y
+                };
+                return true;
+            }
+
+            if (Math.Abs(l.a) <= double.Epsilon) // 수평선
+            {
+                p = new Vertex
+                {
+                    x = v.x,
+                    y = -(l.c)
+                };
+                return true;
+            }
+
+            // 1과 수직이고 (x, y)를 지나는 직선
+            Line perp = point_and_slope_to_line(v, 1 / l.a);
+            return intersection_point(l, perp, ref p);
+        }
+
+    }
 }
