@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryTool", "GeometryTool\GeometryTool.csproj", "{0C62BDB3-3994-4ED7-A36C-94CC34217529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryTool.Core", "GeometryTool.Core\GeometryTool.Core.csproj", "{50997718-1C18-4BF9-A265-E5B981CFEF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryTool.Hexagonal", "GeometryTool.Hexagonal\GeometryTool.Hexagonal.csproj", "{11C66E35-2DEE-422E-AD7E-B6382BC150DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryTool.Hexagonal.Tests", "GeometryTool.Hexagonal.Tests\GeometryTool.Hexagonal.Tests.csproj", "{E430FCBE-66C4-49FA-94DA-0F4EEA73643C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryTool.Tests", "GeometryTool.Tests\GeometryTool.Tests.csproj", "{C4377980-E130-40DF-B2F5-1291C7FBC27B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C62BDB3-3994-4ED7-A36C-94CC34217529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C62BDB3-3994-4ED7-A36C-94CC34217529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C62BDB3-3994-4ED7-A36C-94CC34217529}.Release|Any CPU.ActiveCfg = Release|x86
+		{0C62BDB3-3994-4ED7-A36C-94CC34217529}.Release|Any CPU.Build.0 = Release|x86
+		{50997718-1C18-4BF9-A265-E5B981CFEF42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50997718-1C18-4BF9-A265-E5B981CFEF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50997718-1C18-4BF9-A265-E5B981CFEF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50997718-1C18-4BF9-A265-E5B981CFEF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C66E35-2DEE-422E-AD7E-B6382BC150DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C66E35-2DEE-422E-AD7E-B6382BC150DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C66E35-2DEE-422E-AD7E-B6382BC150DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C66E35-2DEE-422E-AD7E-B6382BC150DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E430FCBE-66C4-49FA-94DA-0F4EEA73643C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E430FCBE-66C4-49FA-94DA-0F4EEA73643C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E430FCBE-66C4-49FA-94DA-0F4EEA73643C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E430FCBE-66C4-49FA-94DA-0F4EEA73643C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4377980-E130-40DF-B2F5-1291C7FBC27B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4377980-E130-40DF-B2F5-1291C7FBC27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4377980-E130-40DF-B2F5-1291C7FBC27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4377980-E130-40DF-B2F5-1291C7FBC27B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

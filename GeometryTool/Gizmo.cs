@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using GeometryTool.Gizmos;
 
-namespace GeometryTool
-{
-    public class Gizmo
-    {
-        public Gizmo()
-        {
+namespace GeometryTool {
+  public class Gizmo {
+    public Behavior behavor {
+      get {
+        return behavor_;
+      }
 
-        }
-
-        public Action<MouseEventArgs> OnClick;
-        public Action<MouseEventArgs> OnMove;
-        public Action OnFinish;
+      set {
+        behavor_ = value;
+      }
     }
+
+    public Gizmo () {}
+    
+    private Behavior behavor_;
+  }
 }

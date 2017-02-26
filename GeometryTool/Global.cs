@@ -1,31 +1,16 @@
-﻿using System;
+﻿using GeometryTool.CanvasDetail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GeometryTool
-{
-    public class Global
-    {
-        static Global instance = new Global();
-        public static Global Instance
-        {
-            get { return instance; }
-        }
-
-        Gizmo gizmo;
-        public Gizmo Gizmo
-        {
-            get
-            { return gizmo; }
-            set
-            {
-                if (gizmo != null)
-                {
-                    gizmo.OnFinish();
-                }
-                gizmo = value;
-            }
-        }
+namespace GeometryTool {
+  public class Global {
+    public static Global Instance {
+      get { return instance; }
     }
+    private static Global instance = new Global();
+
+    public Context Context { get; set; }
+  }
 }

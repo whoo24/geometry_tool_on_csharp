@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Canvas
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
-            this.Name = "Canvas";
-            this.Size = new System.Drawing.Size(489, 412);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
-            this.Resize += new System.EventHandler(this.Canvas_Resize);
-            this.ResumeLayout(false);
+      this.SuspendLayout();
+      // 
+      // Canvas
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.DoubleBuffered = true;
+      this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+      this.Name = "Canvas";
+      this.Size = new System.Drawing.Size(559, 515);
+      this.Load += new System.EventHandler(this.Canvas_Load);
+      this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+      this.Resize += new System.EventHandler(this.Canvas_Resize);
+      this.ResumeLayout(false);
 
         }
 
