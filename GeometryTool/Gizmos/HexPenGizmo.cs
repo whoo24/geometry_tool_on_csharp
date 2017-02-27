@@ -36,21 +36,12 @@ namespace GeometryTool.Gizmos {
 
       context.container.points_.Add(mouse_p);
       var local_pt = context.ToLocal(e.Location);
-      Hex candidate = new Hex();
-      var rectangle = new Core.Rect();
-      Core.Rect header = null;
-      DrawHex(Hexagonal.Layout.GetHexFromPixel(pointy_, new Hexagonal.Point(local_pt.x, local_pt.y), ref candidate, ref rectangle, ref header), Color.Red, context);
-      //DrawPixelToHex(Hexagonal.Layout.PixelToHex(pointy_, new Hexagonal.Point(local_pt.X, local_pt.Y)));
+      DrawHex(Hexagonal.Layout.GetHexFromPixel(pointy_, new Hexagonal.Point(local_pt.x, local_pt.y)), Color.Red, context);
 
-      DrawHex(candidate, Color.Green, context);
-      context.container.rectangles_.Add(new RectangleObject(rectangle, Color.Gray));
-      if (header != null) {
-        context.container.rectangles_.Add(new RectangleObject(header, Color.HotPink));
-      }
       canvas_.Refresh();
     }
     
-    private void DrawHex (Hex h, Color line_color, Context context) {
+    public void DrawHex (Hex h, Color line_color, Context context) {
       //FractionalHex fhex = Hexagonal.Layout.PixelToHex(pointy_, Hexagonal.Layout.HexToPixel(pointy_, h));
       List<Hexagonal.Point> corners = Hexagonal.Layout.PolygonCorners(pointy_, h);
       PointObject p1 = new PointObject();
@@ -83,7 +74,7 @@ namespace GeometryTool.Gizmos {
         lb = new Core.Coord2d(center.x + -60, center.y + -70),
         rb = new Core.Coord2d(center.x + 60, center.y + -70)
       };
-      r.Color = Color.Aqua;
+      r.Color = Color.Bisque;
       context.container.rectangles_.Add(r);
     }
   }

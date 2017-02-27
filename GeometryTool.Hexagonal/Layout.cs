@@ -15,14 +15,14 @@ namespace GeometryTool.Hexagonal {
     public readonly Orientation orientation;
     public readonly Point size;
     public readonly Point origin;
-    static public Orientation pointy = new Orientation(Math.Sqrt(3.0), Math.Sqrt(3.0) / 2.0, 0.0, -3.0 / 2.0, Math.Sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
+    static public Orientation pointy = new Orientation(/*Math.Sqrt(3.0)*/2.0, /*Math.Sqrt(3.0)*/2.0 / 2.0, 0.0, -3.0 / 2.0, /*Math.Sqrt(3.0)*/2.0 / 3.0, -1.0 / 3.0, 0.0, -2.0 / 3.0, 0.5);
     static public Orientation flat = new Orientation(3.0 / 2.0, 0.0, Math.Sqrt(3.0) / 2.0, Math.Sqrt(3.0), 2.0 / 3.0, 0.0, -1.0 / 3.0, Math.Sqrt(3.0) / 3.0, 0.0);
 
     static public Point HexToPixel (Layout layout, Hex h) {
       Orientation M = layout.orientation;
       Point size = layout.size;
       Point origin = layout.origin;
-      double x = (/*M.f0*/2.0f * h.q + 1.0f * (h.r & 1)) * size.x;
+      double x = (M.f0 * h.q + 1.0f * (h.r & 1)) * size.x;
       //double x = (M.f0 * h.q + M.f1 * (h.r & 1)) * size.x;
       double y = (M.f2 * h.q + M.f3 * h.r) * size.y;
       return new Point(x + origin.x, y + origin.y);
@@ -39,39 +39,8 @@ namespace GeometryTool.Hexagonal {
       return new FractionalHex(q, r, -q - r);
     }
 
-    static public Hex GetHexFromPixel (Layout layout, Point p, ref Hex c, ref Rect r, ref Rect h) {
-      Orientation M = layout.orientation;
-      Point size = layout.size;
-      Point origin = layout.origin;
-      //int q = (int)Math.Floor(pt.x);
-      //int r = 0;// (M.f2 * (int)(pt.y / size.y) + M.f3 * pt.x / M.f0) * size.y;
-      var candidate = FractionalHex.HexRound(PixelToHex(layout, p));
-      c = candidate;
-      //var candidate = new Hex(q, r, -q - r);
-      var corners = PolygonCorners(layout, candidate);
-      double hex_h = corners[0].y - corners[1].y;
-      double hex_w = corners[0].x - corners[4].x;
-      // body
-      Rect rect = new Rect();
-      var center = HexToPixel(layout, candidate);
-      rect.SetCenter(new Coord2d(center.x, center.y));
-      rect.SetWidth(hex_w);
-      rect.SetHeight(hex_h);
-      r = rect;
-      if (rect.Contains(new Coord2d(p.x, p.y))) {
-        return candidate;
-      }
-      // header
-      Rect header = new Rect();
-      header.SetCenter(new Coord2d(center.x, 0));// corners[0].y + (corners[5].y - corners[0].y) * 0.5));
-      header.SetWidth(corners[0].x - corners[4].x);
-      header.SetHeight(corners[5].y - corners[0].y);
-      h = header;
-      if (rect.Contains(new Coord2d(p.x, p.y))) {
-        return Hex.Add(candidate, new Hex(0, -1, 1));
-      } else {
-        return Hex.Add(candidate, new Hex(0, 1, -1));
-      }
+    static public Hex GetHexFromPixel (Layout layout, Point p) {
+      return FractionalHex.HexRound(PixelToHex(layout, p));
     }
 
     static public Point HexCornerOffset (Layout layout, int corner) {
@@ -81,7 +50,6 @@ namespace GeometryTool.Hexagonal {
       double degree = angle * (180.0f / Math.PI);
       return new Point(size.x * (corner == 2 || corner == 5 ? Math.Cos(angle) : 1.0f * Math.Sign(Math.Cos(angle))), size.y * Math.Sin(angle));
     }
-
 
     static public List<Point> PolygonCorners (Layout layout, Hex h) {
       List<Point> corners = new List<Point> { };

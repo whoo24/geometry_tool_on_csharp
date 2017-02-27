@@ -21,10 +21,6 @@ namespace GeometryTool {
       Global.Instance.Context.gizmo.behavor = new Gizmos.LinkPointGizmo(panel1);
     }
 
-    private void toolStripButton3_Click (object sender, EventArgs e) {
-      Global.Instance.Context.gizmo.behavor = new Gizmos.HexPenGizmo(panel1);
-    }
-
     private void panel1_Click (object sender, EventArgs e) {
       Global.Instance.Context.gizmo.behavor.OnClick(e as MouseEventArgs, Global.Instance.Context);
     }
@@ -62,7 +58,14 @@ namespace GeometryTool {
     }
 
     private void toolStripButton4_Click (object sender, EventArgs e) {
-      Global.Instance.Context.gizmo.behavor = new Gizmos.HexPenGizmo(panel1);
+      var gizmo = new Gizmos.HexPenGizmo(panel1);
+      Global.Instance.Context.gizmo.behavor = gizmo;
+      for(int y = 0; y < 3; ++y) {
+        for (int x = 0; x < 3; ++x) {
+          gizmo.DrawHex(new Hexagonal.Hex(x, y, -x -y), System.Drawing.Color.Blue, Global.Instance.Context);
+        }
+      }
+      panel1.Refresh();
     }
 
     private void toolStripButton3_Click_1 (object sender, EventArgs e) {

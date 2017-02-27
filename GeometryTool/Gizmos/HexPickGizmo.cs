@@ -31,16 +31,8 @@ namespace GeometryTool.Gizmos {
         return;
       }
       var local_pt = context.ToLocal(e.Location);
-      Hex candidate = new Hex();
-      var rectangle = new Core.Rect();
-      Core.Rect header = null;
-      DrawHex(Layout.GetHexFromPixel(pointy_, new Hexagonal.Point(local_pt.x, local_pt.y), ref candidate, ref rectangle, ref header), Color.Red, context);
-
-      DrawHex(candidate, Color.Green, context);
-      context.container.rectangles_.Add(new RectangleObject(rectangle, Color.Gray));
-      if (header != null) {
-        context.container.rectangles_.Add(new RectangleObject(header, Color.HotPink));
-      }
+      var hex = Layout.GetHexFromPixel(pointy_, new Hexagonal.Point(local_pt.x, local_pt.y));
+      DrawHex(hex, Color.Red, context);
       canvas_.Refresh();
     }
     
