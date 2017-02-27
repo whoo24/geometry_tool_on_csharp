@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GeometryTool.Hexagonal {
-
   [System.Serializable]
   public struct Hex {
     public Hex (int q, int r, int s) {
@@ -22,11 +21,9 @@ namespace GeometryTool.Hexagonal {
       return new Hex(a.q + b.q, a.r + b.r, a.s + b.s);
     }
 
-
     static public Hex Subtract (Hex a, Hex b) {
       return new Hex(a.q - b.q, a.r - b.r, a.s - b.s);
     }
-
 
     static public Hex Scale (Hex a, int k) {
       return new Hex(a.q * k, a.r * k, a.s * k);
@@ -38,7 +35,6 @@ namespace GeometryTool.Hexagonal {
       return Hex.directions[direction];
     }
 
-
     static public Hex Neighbor (Hex hex, int direction) {
       return Hex.Add(hex, Hex.Direction(direction));
     }
@@ -49,15 +45,16 @@ namespace GeometryTool.Hexagonal {
       return Hex.Add(hex, Hex.diagonals[direction]);
     }
 
-
     static public int Length (Hex hex) {
       return (int)((Math.Abs(hex.q) + Math.Abs(hex.r) + Math.Abs(hex.s)) / 2);
     }
-
 
     static public int Distance (Hex a, Hex b) {
       return Hex.Length(Hex.Subtract(a, b));
     }
 
+    static public bool Equals (Hex a, Hex b) {
+      return (a.q == b.q && a.s == b.s && a.r == b.r);
+    }
   }
 }
