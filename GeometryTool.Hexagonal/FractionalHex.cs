@@ -51,5 +51,31 @@ namespace GeometryTool.Hexagonal {
       return results;
     }
 
+    static public bool Equals (FractionalHex a, FractionalHex b) {
+      return (a.q == b.q && a.s == b.s && a.r == b.r);
+    }
+
+    public override bool Equals (object b) {
+      if (b is FractionalHex) {
+        return Equals(this, (FractionalHex)b);
+      }
+      return base.Equals(b);
+    }
+
+    static public bool operator == (FractionalHex a, FractionalHex b) {
+      return Equals(a, b);
+    }
+
+    static public bool operator != (FractionalHex a, FractionalHex b) {
+      return !(a == b);
+    }
+
+    public override int GetHashCode () {
+      return base.GetHashCode();
+    }
+
+    public override string ToString () {
+      return string.Format("({0}, {1}, {2})", q, r, s);
+    }
   }
 }

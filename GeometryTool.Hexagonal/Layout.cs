@@ -15,7 +15,7 @@ namespace GeometryTool.Hexagonal {
     public readonly Orientation orientation;
     public readonly Point size;
     public readonly Point origin;
-    static public Orientation pointy = new Orientation(/*Math.Sqrt(3.0)*/2.0, /*Math.Sqrt(3.0)*/2.0 / 2.0, 0.0, -3.0 / 2.0, /*Math.Sqrt(3.0)*/2.0 / 3.0, -1.0 / 3.0, 0.0, -2.0 / 3.0, 0.5);
+    static public Orientation pointy = new Orientation(f0:/*Math.Sqrt(3.0)*/2.0,f1: /*Math.Sqrt(3.0)*/2.0 / 2.0, f2: 0.0, f3: -3.0 / 2.0, b0: /*Math.Sqrt(3.0) / 3.0*/ 0.5, b1: -1.0 / 3.0, b2: 0.0, b3: -2.0 / 3.0, start_angle: 0.5);
     static public Orientation flat = new Orientation(3.0 / 2.0, 0.0, Math.Sqrt(3.0) / 2.0, Math.Sqrt(3.0), 2.0 / 3.0, 0.0, -1.0 / 3.0, Math.Sqrt(3.0) / 3.0, 0.0);
 
     static public Point HexToPixel (Layout layout, Hex h) {

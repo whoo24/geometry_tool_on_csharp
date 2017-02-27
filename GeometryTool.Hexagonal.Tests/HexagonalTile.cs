@@ -41,18 +41,14 @@ namespace GeometryTool.Hexagonal.Tests {
 
       [TestMethod]
       public void TestHexRound_1 () {
-        FractionalHex a = new FractionalHex(0, 0, 0);
-        FractionalHex b = new FractionalHex(1, -1, 0);
-        FractionalHex c = new FractionalHex(0, -1, 1);
-        Assert.IsTrue(Hex.Equals(new Hex(5, -10, 5), FractionalHex.HexRound(FractionalHex.HexLerp(new FractionalHex(0, 0, 0), new FractionalHex(10, -20, 10), 0.5))));
+        var lerped = FractionalHex.HexLerp(new FractionalHex(0, 0, 0), new FractionalHex(10, -20, 10), 0.5);
+        Assert.AreEqual(new Hex(5, -10, 5), FractionalHex.HexRound(lerped));
       }
 
       [TestMethod]
       public void TestHexRound_2 () {
-        FractionalHex a = new FractionalHex(0, 0, 0);
-        FractionalHex b = new FractionalHex(1, -1, 0);
-        FractionalHex c = new FractionalHex(0, -1, 1);
-        Assert.IsTrue(Hex.Equals(FractionalHex.HexRound(a), FractionalHex.HexRound(FractionalHex.HexLerp(a, b, 0.499))));
+        var lerped = FractionalHex.HexLerp(new FractionalHex(0, 0, 0), new FractionalHex(1, -1, 0), 0.499);
+        Assert.AreEqual(new Hex(0, 0, 0), FractionalHex.HexRound(lerped));
       }
 
       [TestMethod]
@@ -60,7 +56,7 @@ namespace GeometryTool.Hexagonal.Tests {
         FractionalHex a = new FractionalHex(0, 0, 0);
         FractionalHex b = new FractionalHex(1, -1, 0);
         FractionalHex c = new FractionalHex(0, -1, 1);
-        Assert.IsTrue(Hex.Equals(FractionalHex.HexRound(b), FractionalHex.HexRound(FractionalHex.HexLerp(a, b, 0.501))));
+        Assert.AreEqual(FractionalHex.HexRound(b), FractionalHex.HexRound(FractionalHex.HexLerp(a, b, 0.501)));
       }
 
       [TestMethod]
@@ -68,7 +64,7 @@ namespace GeometryTool.Hexagonal.Tests {
         FractionalHex a = new FractionalHex(0, 0, 0);
         FractionalHex b = new FractionalHex(1, -1, 0);
         FractionalHex c = new FractionalHex(0, -1, 1);
-        Assert.IsTrue(Hex.Equals(FractionalHex.HexRound(a), FractionalHex.HexRound(new FractionalHex(a.q * 0.4 + b.q * 0.3 + c.q * 0.3, a.r * 0.4 + b.r * 0.3 + c.r * 0.3, a.s * 0.4 + b.s * 0.3 + c.s * 0.3))));
+        Assert.AreEqual(FractionalHex.HexRound(a), FractionalHex.HexRound(new FractionalHex(a.q * 0.4 + b.q * 0.3 + c.q * 0.3, a.r * 0.4 + b.r * 0.3 + c.r * 0.3, a.s * 0.4 + b.s * 0.3 + c.s * 0.3)));
       }
 
       [TestMethod]
@@ -76,7 +72,7 @@ namespace GeometryTool.Hexagonal.Tests {
         FractionalHex a = new FractionalHex(0, 0, 0);
         FractionalHex b = new FractionalHex(1, -1, 0);
         FractionalHex c = new FractionalHex(0, -1, 1);
-        Assert.IsTrue(Hex.Equals(FractionalHex.HexRound(c), FractionalHex.HexRound(new FractionalHex(a.q * 0.3 + b.q * 0.3 + c.q * 0.4, a.r * 0.3 + b.r * 0.3 + c.r * 0.4, a.s * 0.3 + b.s * 0.3 + c.s * 0.4))));
+        Assert.AreEqual(FractionalHex.HexRound(c), FractionalHex.HexRound(new FractionalHex(a.q * 0.3 + b.q * 0.3 + c.q * 0.4, a.r * 0.3 + b.r * 0.3 + c.r * 0.4, a.s * 0.3 + b.s * 0.3 + c.s * 0.4)));
       }
 
       [TestMethod]
@@ -103,6 +99,73 @@ namespace GeometryTool.Hexagonal.Tests {
         Hex h = new Hex(3, 4, -7);
         Layout pointy = new Layout(Layout.pointy, new Point(10, 15), new Point(35, 71));
         Assert.IsTrue(Hex.Equals(h, FractionalHex.HexRound(Layout.PixelToHex(pointy, Layout.HexToPixel(pointy, h)))));
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_0_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        Assert.AreEqual(new Hex(0, 0, 0), FractionalHex.HexRound(Layout.PixelToHex(pointy, Layout.HexToPixel(pointy, new Hex(0, 0, 0)))));
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_HexToPixel_1_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var p = Layout.HexToPixel(pointy, new Hex(1, 0, -1));
+        Assert.AreEqual(120, p.x);
+        Assert.AreEqual(0, p.y);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_HexToPixel_0_1 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var p = Layout.HexToPixel(pointy, new Hex(0, 1, -1));
+        Assert.AreEqual(60, p.x);
+        Assert.AreEqual(-105, p.y);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_HexToPixel_1_1 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var p = Layout.HexToPixel(pointy, new Hex(1, 1, -2));
+        Assert.AreEqual(180, p.x);
+        Assert.AreEqual(-105, p.y);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_PixelToHex_0_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var fhex = Layout.PixelToHex(pointy, new Point(0, 0));
+        Assert.AreEqual(new FractionalHex(0, 0, 0), fhex);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_PixelToHex_1_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var fhex = Layout.PixelToHex(pointy, new Point(60, 0));
+        Assert.AreEqual(new FractionalHex(0.5, 0, -0.5), fhex);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_PixelToHex_2_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var fhex = Layout.PixelToHex(pointy, new Point(120, 0));
+        Assert.AreEqual(new FractionalHex(1.0, 0, -1.0), fhex);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_PixelToHex_3_0 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var fhex = Layout.PixelToHex(pointy, new Point(180, 0));
+        Assert.AreEqual(new FractionalHex(1.5, 0, -1.5), fhex);
+      }
+
+      [TestMethod]
+      public void TestLayout_Pointy_1_1 () {
+        Layout pointy = new Layout(Layout.pointy, new Point(60, 70), new Point(0, 0));
+        var p = Layout.HexToPixel(pointy, new Hex(1, 1, -2));
+        var candidated = Layout.PixelToHex(pointy, p);
+        var rounded = FractionalHex.HexRound(candidated);
+        Assert.AreEqual(new Hex(1, 1, -2), rounded);
       }
 
       [TestMethod]

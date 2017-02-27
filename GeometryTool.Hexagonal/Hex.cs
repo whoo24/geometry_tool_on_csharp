@@ -56,5 +56,28 @@ namespace GeometryTool.Hexagonal {
     static public bool Equals (Hex a, Hex b) {
       return (a.q == b.q && a.s == b.s && a.r == b.r);
     }
+
+    public override bool Equals (object b) {
+      if (b is Hex) {
+        return Equals(this, (Hex)b);
+      }
+      return base.Equals(b);
+    }
+
+    static public bool operator == (Hex a, Hex b) {
+      return Equals(a, b);
+    }
+
+    static public bool operator != (Hex a, Hex b) {
+      return !(a == b);
+    }
+
+    public override int GetHashCode () {
+      return base.GetHashCode();
+    }
+
+    public override string ToString () {
+      return string.Format("({0}, {1}, {2})", q, r, s);
+    }
   }
 }
