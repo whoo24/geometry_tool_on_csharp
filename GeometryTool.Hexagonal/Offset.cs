@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GeometryTool.Hexagonal {
-
   [System.Serializable]
   public struct Offset {
     public int row;

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryTool.Hexagonal {
-  [System.Serializable]
+  [Serializable]
   public struct Hex {
     public Hex (int q, int r, int s) {
       this.q = q;
@@ -32,25 +28,25 @@ namespace GeometryTool.Hexagonal {
     static public List<Hex> directions = new List<Hex> { new Hex(1, 0, -1), new Hex(1, -1, 0), new Hex(0, -1, 1), new Hex(-1, 0, 1), new Hex(-1, 1, 0), new Hex(0, 1, -1) };
 
     static public Hex Direction (int direction) {
-      return Hex.directions[direction];
+      return directions[direction];
     }
 
     static public Hex Neighbor (Hex hex, int direction) {
-      return Hex.Add(hex, Hex.Direction(direction));
+      return Add(hex, Hex.Direction(direction));
     }
 
     static public List<Hex> diagonals = new List<Hex> { new Hex(2, -1, -1), new Hex(1, -2, 1), new Hex(-1, -1, 2), new Hex(-2, 1, 1), new Hex(-1, 2, -1), new Hex(1, 1, -2) };
 
     static public Hex DiagonalNeighbor (Hex hex, int direction) {
-      return Hex.Add(hex, Hex.diagonals[direction]);
+      return Hex.Add(hex, diagonals[direction]);
     }
 
     static public int Length (Hex hex) {
-      return (int)((Math.Abs(hex.q) + Math.Abs(hex.r) + Math.Abs(hex.s)) / 2);
+      return (Math.Abs(hex.q) + Math.Abs(hex.r) + Math.Abs(hex.s)) / 2;
     }
 
     static public int Distance (Hex a, Hex b) {
-      return Hex.Length(Hex.Subtract(a, b));
+      return Length(Subtract(a, b));
     }
 
     static public bool Equals (Hex a, Hex b) {

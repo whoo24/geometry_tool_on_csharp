@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryTool.Hexagonal {
   public struct FractionalHex {
@@ -24,8 +21,7 @@ namespace GeometryTool.Hexagonal {
       double s_diff = Math.Abs(s - h.s);
       if (q_diff > r_diff && q_diff > s_diff) {
         q = -r - s;
-      } else
-          if (r_diff > s_diff) {
+      } else if (r_diff > s_diff) {
         r = -q - s;
       } else {
         s = -q - r;
@@ -33,11 +29,9 @@ namespace GeometryTool.Hexagonal {
       return new Hex(q, r, s);
     }
 
-
     static public FractionalHex HexLerp (FractionalHex a, FractionalHex b, double t) {
       return new FractionalHex(a.q * (1 - t) + b.q * t, a.r * (1 - t) + b.r * t, a.s * (1 - t) + b.s * t);
     }
-
 
     static public List<Hex> HexLinedraw (Hex a, Hex b) {
       int N = Hex.Distance(a, b);
@@ -46,7 +40,7 @@ namespace GeometryTool.Hexagonal {
       List<Hex> results = new List<Hex> { };
       double step = 1.0 / Math.Max(N, 1);
       for (int i = 0; i <= N; i++) {
-        results.Add(FractionalHex.HexRound(FractionalHex.HexLerp(a_nudge, b_nudge, step * i)));
+        results.Add(HexRound(FractionalHex.HexLerp(a_nudge, b_nudge, step * i)));
       }
       return results;
     }

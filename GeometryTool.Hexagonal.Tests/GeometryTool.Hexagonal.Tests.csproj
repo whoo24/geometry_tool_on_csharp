@@ -45,12 +45,17 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="HexagonalTile.cs" />
+    <Compile Include="Hexagonal_Origin.cs" />
+    <Compile Include="Hexagonal_Flat.cs" />
+    <Compile Include="Hexagonal_Pointy.cs" />
+    <Compile Include="Hexagonal_Arithmetic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

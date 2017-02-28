@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace GeometryTool.Gizmos {
   public class HexPickGizmo : Behavior {
     private Canvas canvas_;
-    private Layout pointy_ = new Layout(Hexagonal.Layout.pointy, new Hexagonal.Point(60, 70), new Hexagonal.Point(0, 0));
+    private Layout pointy_ = new Layout(Layout.pointy_, new Hexagonal.Point(60 / (System.Math.Sqrt(3) / 2), 70), new Hexagonal.Point(0, 0));
 
     public HexPickGizmo (Canvas canvas) {
       canvas_ = canvas;

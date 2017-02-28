@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeometryTool.Hexagonal;
+using System;
 using System.Windows.Forms;
 
 namespace GeometryTool {
@@ -60,9 +61,12 @@ namespace GeometryTool {
     private void toolStripButton4_Click (object sender, EventArgs e) {
       var gizmo = new Gizmos.HexPenGizmo(panel1);
       Global.Instance.Context.gizmo.behavor = gizmo;
-      for(int y = 0; y < 3; ++y) {
-        for (int x = 0; x < 3; ++x) {
-          gizmo.DrawHex(new Hexagonal.Hex(x, y, -x -y), System.Drawing.Color.Blue, Global.Instance.Context);
+      const int kMaxHeight = 5;
+      const int kMaxWidth = 5;
+      for(int y = 0; y < kMaxHeight; ++y) {
+        for (int x = 0; x < kMaxWidth; ++x) {
+          var o = OffsetCoord.ToScreen(new Hex(x, y, -x - y));
+          gizmo.DrawHex(OffsetCoord.HexToRectangle(o, gizmo.layout.offset), System.Drawing.Color.Blue, Global.Instance.Context);
         }
       }
       panel1.Refresh();
